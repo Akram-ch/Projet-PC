@@ -1,0 +1,35 @@
+package threads;
+
+import java.util.Properties;
+import java.util.concurrent.Semaphore;
+
+import prodcons.IProdConsBuffer;
+import prodcons.Message;
+
+public class Consommateur extends Thread{
+	Semaphore mutex;
+	IProdConsBuffer buffer;
+	Message msg;
+	public Consommateur(Semaphore s, IProdConsBuffer b) {
+		mutex = s;
+		buffer = b;
+	}
+	
+	public void run() {
+		Properties properties = new Properties();
+		properties.loadFromXML(
+				Consommateur.class.getClassLoader().getResourceAsStream("options.xml");
+				);
+		
+		
+		try {
+			Message msg = buffer.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(msg.getContent());
+		
+	}
+}

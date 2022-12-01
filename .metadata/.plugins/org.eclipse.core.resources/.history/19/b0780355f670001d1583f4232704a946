@@ -1,0 +1,11 @@
+package prodcons.v1;
+
+import java.util.Properties;
+
+public class TestProdCons {
+	public static void main(String args[]) {
+		Properties properties = new Properties();
+		properties.loadFromXML(
+		 TestProdCons.class.getClassLoader().getResourceAsStream(“options.xml”));
+	}
+}

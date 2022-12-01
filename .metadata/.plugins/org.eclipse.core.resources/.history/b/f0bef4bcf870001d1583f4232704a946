@@ -1,0 +1,43 @@
+package prodcons.v1;
+
+import prodcons.IProdConsBuffer;
+import prodcons.Message;
+
+public class ProdConsBuffer implements IProdConsBuffer {
+	Message[] messages;
+	int buffSize;
+	int nfull;
+	int nempty;
+	
+	public ProdConsBuffer(int bsize) {
+		buffSize = bsize;
+		messages = new Message[buffSize];
+		nfull = 0;
+		nempty = buffSize;
+	}
+	
+	@Override
+	public void put(Message m) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Message get() throws InterruptedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int nmsg() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int totmsg() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

@@ -1,0 +1,10 @@
+package prodcons;
+
+public interface IProdCons {
+	public void put(Message m) throws InterruptedException;
+	public Message get() throws InterruptedException;
+	public int nmsg();
+	public int totmsg();
+
+
+}

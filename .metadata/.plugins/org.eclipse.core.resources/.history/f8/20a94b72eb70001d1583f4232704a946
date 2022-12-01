@@ -1,0 +1,6 @@
+package ProdCons;
+
+public interface IProdConsBuffer {
+	public void put(Message m) throws InterruptedException;
+
+}

@@ -1,0 +1,15 @@
+package threads;
+
+import java.util.concurrent.Semaphore;
+
+public class Producteur extends Thread{
+	Semaphore mutex;
+	public Producteur(Semaphore s){
+		mutex = s;
+		this.start();
+	}
+	
+	public void run() {
+		
+	}
+}

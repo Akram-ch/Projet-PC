@@ -1,0 +1,51 @@
+package threads;
+
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.Semaphore;
+
+import prodcons.IProdConsBuffer;
+import prodcons.Message;
+
+public class Consommateur extends Thread{
+	Semaphore mutex;
+	IProdConsBuffer buffer;
+	Message msg;
+	int consTime
+	public Consommateur(Semaphore s, IProdConsBuffer b) {
+		mutex = s;
+		buffer = b;
+	}
+	
+	public void run() {
+		Properties properties = new Properties();
+		try {
+			properties.loadFromXML(
+					Consommateur.class.getClassLoader().getResourceAsStream("options.xml")
+					);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		int consTime = Integer.parseInt(properties.getProperty("consTime"));
+		
+		
+		try {
+			Message msg = buffer.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			Thread.sleep(consTime);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(msg.getContent());
+		
+	}
+}

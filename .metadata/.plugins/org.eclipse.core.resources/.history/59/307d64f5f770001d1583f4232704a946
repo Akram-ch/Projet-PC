@@ -1,0 +1,32 @@
+package threads;
+
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.Semaphore;
+
+import prodcons.IProdConsBuffer;
+import prodcons.Message;
+
+public class Consommateur extends Thread{
+	Semaphore mutex;
+	IProdConsBuffer buffer;
+	Message msg;
+	int consTime;
+	public Consommateur(Semaphore s, IProdConsBuffer b, int time) {
+		mutex = s;
+		buffer = b;
+		consTime = time;
+	}
+	
+	public void run() {
+		try {
+			Thread.sleep(consTime);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(msg.getContent());
+		
+	}
+}

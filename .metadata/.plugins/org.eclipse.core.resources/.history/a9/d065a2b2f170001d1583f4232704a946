@@ -1,0 +1,11 @@
+package prodcons;
+
+public class Message {
+	String content;
+	int contentLen;
+	
+	public Message(String text) {
+		content = text;
+		contentLen = content.length();
+	}
+}

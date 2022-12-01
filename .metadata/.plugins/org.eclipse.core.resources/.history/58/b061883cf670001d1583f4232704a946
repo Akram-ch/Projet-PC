@@ -1,0 +1,50 @@
+package threads;
+
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.Semaphore;
+
+import prodcons.IProdConsBuffer;
+import prodcons.Message;
+
+public class Producteur extends Thread {
+	Semaphore mutex;
+	IProdConsBuffer buffer;
+
+	public Producteur(Semaphore s, IProdConsBuffer b) {
+		mutex = s;
+		buffer = b;
+		this.start();
+	}
+
+	public void run() {
+		Properties properties = new Properties();
+		try {
+			properties.loadFromXML(
+					Producteur.class.getClassLoader().getResourceAsStream("options.xml")
+					);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		int maxProd = Integer.parseInt(properties.getProperty("maxProd"));
+		int minProd = Integer.parseInt(properties.getProperty("minProd"));
+
+
+		
+		
+		
+		
+		Long myId = this.getId();
+		String cont = Long.toString(myId);
+		Message msg = new Message(cont);
+		try {
+			buffer.put(msg);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}

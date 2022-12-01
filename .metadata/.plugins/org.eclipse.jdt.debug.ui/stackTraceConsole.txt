@@ -1,0 +1,3 @@
+Properties properties = new Properties();
+properties.loadFromXML(
+ TestProdCons.class.getClassLoader().getResourceAsStream(“options.xml”));

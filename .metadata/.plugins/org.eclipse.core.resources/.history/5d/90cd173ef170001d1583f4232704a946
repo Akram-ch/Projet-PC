@@ -1,0 +1,26 @@
+package threads;
+
+import java.util.concurrent.Semaphore;
+
+import prodcons.IProdConsBuffer;
+import prodcons.Message;
+
+public class Producteur extends Thread{
+	Semaphore mutex;
+	IProdConsBuffer buffer;
+	public Producteur(Semaphore s, IProdConsBuffer b){
+		mutex = s;
+		buffer = b;
+		msg = m;
+		this.start();
+	}
+	
+	public void run() {
+		try {
+			buffer.put(msg);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

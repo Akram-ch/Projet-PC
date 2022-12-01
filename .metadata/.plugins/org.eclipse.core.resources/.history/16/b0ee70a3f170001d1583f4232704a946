@@ -1,0 +1,6 @@
+package prodcons;
+
+public class Message {
+	String content;
+	int contentLen;
+}
