@@ -1,0 +1,7 @@
+package prodcons.v3;
+
+import prodcons.IProdConsBuffer;
+
+public class ProdConsBuffer implements IProdConsBuffer {
+
+}

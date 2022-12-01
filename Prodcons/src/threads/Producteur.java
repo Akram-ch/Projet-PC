@@ -20,6 +20,7 @@ public class Producteur extends Thread {
 	public void run() {
 		Random r = new Random();
 		int generated = r.nextInt(maxProd-minProd) + minProd;
+		System.out.println("Message produced "+ this.getId());
 		
 		Long myId = this.getId();
 		String cont = Long.toString(myId);

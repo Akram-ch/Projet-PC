@@ -4,7 +4,7 @@ import prodcons.IProdConsBuffer;
 import prodcons.Message;
 
 public class ProdConsBuffer implements IProdConsBuffer {
-	Message[] messages;
+	private Message[] messages;
 	private int buffSize;
 	private int nfull;
 	private int nempty;

@@ -1,0 +1,56 @@
+package prodcons.v3;
+
+import java.util.concurrent.Semaphore;
+
+import prodcons.IProdConsBuffer;
+import prodcons.Message;
+
+public class ProdConsBuffer implements IProdConsBuffer {
+	private Semaphore fifoIn;
+	private Semaphore fifoOut;
+	private Message[] messages;
+	private int buffSize;
+	private int nfull;
+	private int nempty;
+	private int in;
+	private int out;
+	private int totmsg;
+	
+	public ProdConsBuffer (int buffSz){
+		messages = new Message[buffSz];
+		fifoIn = new Semaphore(1);
+		fifoOut = new Semaphore(2);
+		buffSize = buffSz;
+		nfull = 0;
+		nempty = buffSize;
+		in = 0;
+		out = 0;
+		totmsg = 0;
+		
+	}
+	
+	@Override
+	public void put(Message m) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Message get() throws InterruptedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int nmsg() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int totmsg() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
