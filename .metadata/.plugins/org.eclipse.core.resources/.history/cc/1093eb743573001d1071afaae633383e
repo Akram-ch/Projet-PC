@@ -1,0 +1,7 @@
+package prodcons.v1;
+
+public class Consumer {
+	public Consumer(ProdConsBuffer b, int time) {
+		
+	}
+}

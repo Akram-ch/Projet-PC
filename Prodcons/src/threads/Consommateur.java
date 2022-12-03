@@ -1,8 +1,6 @@
 package threads;
 
 
-import java.util.concurrent.Semaphore;
-
 import prodcons.IProdConsBuffer;
 import prodcons.Message;
 

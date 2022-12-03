@@ -1,7 +1,0 @@
-package threads;
-
-public class Producteur extends Thread{
-	public Producteur(){
-		
-	}
-}

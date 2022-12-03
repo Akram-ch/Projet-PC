@@ -1,0 +1,18 @@
+package prodcons.v1;
+
+public class Consumer extends Thread {
+	private ProdConsBuffer buffer;
+	private int consTime;
+	
+	public Consumer(ProdConsBuffer b, int time) {
+		buffer = b;
+		consTime = time;
+		this.start();
+	}
+	
+	public void run() {
+		while(true) {
+			Message msg = new Message();
+		}
+	}
+}

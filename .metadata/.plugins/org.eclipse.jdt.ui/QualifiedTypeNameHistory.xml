@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.concurrent.Semaphore"/>
-    <fullyQualifiedTypeName name="prodcons.IProdConsBuffer"/>
     <fullyQualifiedTypeName name="prodcons.Message"/>
     <fullyQualifiedTypeName name="java.util.Properties"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="threads.Producteur"/>
     <fullyQualifiedTypeName name="threads.Consommateur"/>
+    <fullyQualifiedTypeName name="prodcons.IProdConsBuffer"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.Semaphore"/>
 </qualifiedTypeNameHistroy>

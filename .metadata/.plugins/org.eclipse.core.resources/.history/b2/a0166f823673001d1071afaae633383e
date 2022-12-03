@@ -1,0 +1,12 @@
+package prodcons.v1;
+
+public class Producer extends Thread {
+	private ProdConsBuffer buffer;
+	private int minProd, maxProd;
+	
+	public Producer(ProdConsBuffer b, int min, int max) {
+		buffer = b;
+		minProd = min;
+		maxProd = max;
+	}
+}

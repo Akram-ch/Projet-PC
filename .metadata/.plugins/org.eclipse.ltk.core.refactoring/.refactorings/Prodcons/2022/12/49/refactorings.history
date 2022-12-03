@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;Producer.java&apos; to &apos;Prodcons/src/prodcons.v1&apos;&#x0D;&#x0A;- Original project: &apos;Prodcons&apos;&#x0D;&#x0A;- Destination element: &apos;Prodcons/src/prodcons.v1&apos;&#x0D;&#x0A;- Original element: &apos;prodcons.Producer.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;prodcons.v1" element1="/src&lt;prodcons{Producer.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1670090809933" units="1" version="1.0"/>
+</session>

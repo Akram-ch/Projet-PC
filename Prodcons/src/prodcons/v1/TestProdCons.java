@@ -8,7 +8,7 @@ import threads.Consommateur;
 import threads.Producteur;
 
 public class TestProdCons {
-	public static void main(String args[]) throws InvalidPropertiesFormatException, IOException {
+	public static void main(String args[]) throws InvalidPropertiesFormatException, IOException, InterruptedException {
 		
 		Properties properties = new Properties();
 		properties.loadFromXML(TestProdCons.class.getClassLoader().getResourceAsStream("options.xml"));
@@ -21,15 +21,19 @@ public class TestProdCons {
 				
 		ProdConsBuffer buffer = new ProdConsBuffer(bufSz);
 		
-		Producteur[] prods = new Producteur[nProd];
-		Consommateur[] consos = new Consommateur[nCons];
+		Producer[] prods = new Producer[nProd];
+		Consumer[] consos = new Consumer[nCons];
 		
 		for (int i = 0; i < nProd; i++) {
-			prods[i] = new Producteur(buffer, minProd, maxProd);
+			prods[i] = new Producer(buffer, minProd, maxProd);
 		}
 		
 		for (int j = 0; j < nCons; j++) {
-			consos[j] = new Consommateur(buffer, consTime);
+			consos[j] = new Consumer(buffer, consTime);
+		}
+		
+		for (int j = 0; j < nCons; j++) {
+			consos[j].join();
 		}
 	}
 }
