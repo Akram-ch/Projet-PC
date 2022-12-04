@@ -10,6 +10,7 @@ public class ProdConsBuffer implements IProdConsBuffer {
 	private int nempty;
 	private int in;
 	private int out;
+
 	private int totmsg;
 
 	public ProdConsBuffer(int bsize) {
@@ -19,7 +20,6 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		nempty = buffSize;
 		in = 0;
 		out = 0;
-
 	}
 
 	@Override
@@ -32,6 +32,7 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		totmsg++;
 		nfull++;
 		nempty--;
+		Consumer.nbLectures++;
 		notifyAll();
 	}
 
@@ -41,15 +42,20 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		while (nempty == buffSize)
 			wait();
 		Message result = messages[out];
-		out = (out + 1) % buffSize;
+
+		Consumer.nbLectures--;
 		nempty++;
 		nfull--;
+
+		out = (out + 1) % buffSize;
+		if (Consumer.nbLectures == 0 && Producer.nbAlive() == 0)
+			System.exit(0);
 		notifyAll();
 		return result;
 	}
 
 	@Override
-	public synchronized  int nmsg() {
+	public synchronized int nmsg() {
 		// TODO Auto-generated method stub
 		return nfull;
 	}

@@ -1,10 +1,12 @@
-package prodcons.v1;
+package prodcons.v2;
 
 import prodcons.Message;
 
 public class Consumer extends Thread {
 	private ProdConsBuffer buffer;
 	private int consTime;
+	static int nbLectures = 0;
+	private static int nbread = 0;
 
 	public Consumer(ProdConsBuffer b, int time) {
 		buffer = b;
@@ -13,12 +15,12 @@ public class Consumer extends Thread {
 	}
 
 	public void run() {
-		Message msg = null;
 		while (true) {
+
+			Message msg = new Message();
 			try {
 				msg = buffer.get();
-				if (msg == null)
-					continue;
+				nbread++;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -26,11 +28,16 @@ public class Consumer extends Thread {
 			try {
 				Thread.sleep(consTime);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			System.out.println("Message Id "+ msg.getId() + " Produced by thred n: "+ msg.getContent()+ " Processed by "+ this.getId());
+
+			System.out.println("Producers alive : " + Producer.nbAlive());
+			System.out.println("Nb lectures : " + nbLectures);
+			System.out.println("Messages read : " + nbread);
+
+			// System.out.println("Message Id "+ msg.getId() + " Produced by thred n: "+
+			// msg.getContent());
+
 		}
 	}
 }
