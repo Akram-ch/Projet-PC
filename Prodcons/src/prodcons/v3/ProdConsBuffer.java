@@ -23,10 +23,10 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		in = 0;
 		out = 0;
 		totmsg = 0;
-		notFull = new Semaphore(buffSize);
-		notEmpty = new Semaphore(0);
-		mutexIn = new Semaphore(1);
-		mutexOut = new Semaphore(1);
+		notFull = new Semaphore(buffSize, true);
+		notEmpty = new Semaphore(0, true);
+		mutexIn = new Semaphore(1, true);
+		mutexOut = new Semaphore(1, true);
 	}
 
 	public void put(Message m) throws InterruptedException {
@@ -36,11 +36,15 @@ public class ProdConsBuffer implements IProdConsBuffer {
 			messages[in] = m;
 			in = (in + 1) % buffSize;
 			totmsg++;
-			Consumer.nbLectures++;
+			Producer.nextId++;
+			System.out.println("Message" + m.getId() + " produced by " + Thread.currentThread().getName());
+			//Consumer.nbLectures++;
 		} finally {
+			//printBuffer();
 			mutexIn.release();
 			notEmpty.release();
 		}
+
 	}
 
 	@Override
@@ -50,9 +54,12 @@ public class ProdConsBuffer implements IProdConsBuffer {
 			notEmpty.acquire();
 			mutexOut.acquire();
 			result = messages[out];
-			Consumer.nbLectures--;
+			//Consumer.nbLectures--;
+			Consumer.nbread++;
 			out = (out + 1) % buffSize;
 		} finally {
+			//printBuffer();
+			System.out.println("Message Id " + result.getId() + " Produced by thred n: " + result.getContent() + " Consumed by " + Thread.currentThread().getName());
 			mutexOut.release();
 			notFull.release();
 		}
@@ -69,5 +76,17 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		// TODO Auto-generated method stub
 		return totmsg;
 	}
+	
 
+	@Override
+	public void put(Message m, int nb) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Message[] get(int nb) throws InterruptedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

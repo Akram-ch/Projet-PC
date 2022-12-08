@@ -19,7 +19,6 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		nempty = buffSize;
 		in = 0;
 		out = 0;
-
 	}
 
 	@Override
@@ -29,9 +28,11 @@ public class ProdConsBuffer implements IProdConsBuffer {
 			wait();
 		messages[in] = m;
 		in = (in + 1) % buffSize;
+		Producer.nextId++;
 		totmsg++;
 		nfull++;
 		nempty--;
+		System.out.println("Message" + m.getId() + " produced by " + Thread.currentThread().getName());
 		notifyAll();
 	}
 
@@ -44,12 +45,13 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		out = (out + 1) % buffSize;
 		nempty++;
 		nfull--;
+		System.out.println("Message Id " + result.getId() + " Produced by thred n: " + result.getContent() + " Consumed by " + Thread.currentThread().getName());
 		notifyAll();
 		return result;
 	}
 
 	@Override
-	public synchronized  int nmsg() {
+	public int nmsg() {
 		// TODO Auto-generated method stub
 		return nfull;
 	}
@@ -58,6 +60,18 @@ public class ProdConsBuffer implements IProdConsBuffer {
 	public int totmsg() {
 		// TODO Auto-generated method stub
 		return totmsg;
+	}
+
+	@Override
+	public void put(Message m, int nb) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Message[] get(int nb) throws InterruptedException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

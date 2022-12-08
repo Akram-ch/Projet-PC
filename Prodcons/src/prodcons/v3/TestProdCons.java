@@ -1,9 +1,11 @@
-package prodcons.v3;
+ package prodcons.v3;
 
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import java.util.Random;
+
+import prodcons.v2.Producer;
 
 public class TestProdCons {
 	public static void main(String args[]) throws InvalidPropertiesFormatException, IOException, InterruptedException {
@@ -19,12 +21,13 @@ public class TestProdCons {
 
 		ProdConsBuffer buffer = new ProdConsBuffer(bufSz);
 
-		Producer[] prods = new Producer[nProd];
+		prodcons.v3.Producer[] prods = new prodcons.v3.Producer[nProd];
 		Consumer[] consos = new Consumer[nCons];
 
 		System.out.println("nProds = " + nProd);
 		System.out.println("nCons = " + nCons);
 		System.out.println("buffer Size = " + bufSz);
+		Producer.producersAlive = nProd;
 
 		Random rand = new Random();
 		int i = 0;
@@ -34,7 +37,7 @@ public class TestProdCons {
 			choice = rand.nextBoolean();
 			if (choice) {
 				if (i < nProd) {
-					prods[i] = new Producer(buffer, minProd, maxProd);
+					prods[i] = new prodcons.v3.Producer(buffer, minProd, maxProd);
 					i++;
 				}
 			} else {
@@ -45,15 +48,5 @@ public class TestProdCons {
 			}
 		}
 
-		/*
-		 * for (int i = 0; i < nProd; i++) { prods[i] = new Producer(buffer, minProd,
-		 * maxProd); }
-		 * 
-		 * for (int j = 0; j < nCons; j++) { consos[j] = new Consumer(buffer, consTime);
-		 * }
-		 * 
-		 * for (int j = 0; j < nCons; j++) { consos[j].join(); }
-		 */
-		System.out.println("Traitement des messages terminé");
 	}
 }
