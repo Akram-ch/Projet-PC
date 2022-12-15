@@ -1,6 +1,7 @@
 package prodcons.v2;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import java.util.Random;
@@ -19,13 +20,16 @@ public class TestProdCons {
 
 		ProdConsBuffer buffer = new ProdConsBuffer(bufSz);
 
+		System.out.println("maxProd = " + maxProd);
+		System.out.println("minProd = " + minProd);
 		Producer[] prods = new Producer[nProd];
 		Consumer[] consos = new Consumer[nCons];
-
 		System.out.println("nProds = " + nProd);
 		System.out.println("nCons = " + nCons);
 		System.out.println("buffer Size = " + bufSz);
-		
+
+		Producer.producersAlive = nProd;
+
 		Random rand = new Random();
 		int i = 0;
 		int j = 0;
@@ -37,25 +41,18 @@ public class TestProdCons {
 					prods[i] = new Producer(buffer, minProd, maxProd);
 					i++;
 				}
-			}
-			else {
+			} else {
 				if (j < nCons) {
 					consos[j] = new Consumer(buffer, consTime);
 					j++;
 				}
 			}
 		}
-		
-		
-		/*
-		 * for (int i = 0; i < nProd; i++) { prods[i] = new Producer(buffer, minProd,
-		 * maxProd); }
-		 * 
-		 * for (int j = 0; j < nCons; j++) { consos[j] = new Consumer(buffer,
-		 * consTime); }
-		 * 
-		 * for (int j = 0; j < nCons; j++) { consos[j].join(); }
-		 */
+
+		for (int k = 0; k < nCons; k++) {
+			consos[k].join();
+		}
+
 		System.out.println("Traitement des messages terminé");
 	}
 }

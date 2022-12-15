@@ -25,7 +25,7 @@ public class Producteur extends Thread {
 		Long myId = this.getId();
 		String cont = Long.toString(myId);
 		for (int i = 0; i < generated; i++) {
-			Message msg = new Message(cont);
+			Message msg = new Message(cont, i);
 			try {
 				buffer.put(msg);
 			} catch (InterruptedException e) {

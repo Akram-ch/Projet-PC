@@ -1,25 +1,29 @@
 package prodcons;
 
 public class Message {
-	private String content;
-	private int contentLen;
+	private long content;
 	private int id;
-	private boolean processed;
+	private int nbCopy;
 
 	public Message() {
-		content = "";
-		contentLen = 0;
-		processed = false;
+		content = 0;
 	}
 	
-	public Message(String text, int id) {
-		content = text;
-		contentLen = content.length();
-		processed = false;
+	public Message(int id) {
 		this.id = id;
 	}
 
-	public String getContent() {
+	public Message (long msg) {
+		content = msg;
+		nbCopy = 1;
+	}
+	
+	public Message(long msg, int id) {
+		content = msg;
+		this.id = id;
+	}
+
+	public long getContent() {
 		return content;
 	}
 
@@ -27,15 +31,19 @@ public class Message {
 		return id;
 	}
 	
-	public int getContentLen() {
-		return contentLen;
+	public int getNbCopy() {
+		return nbCopy;
 	}
 	
-	public void process() {
-		processed = true;
+	public void setNbCopy(int nb) {
+		nbCopy = nb;
 	}
 	
-	public boolean isProcessed() {
-		return processed;
+	public void consCopy() {
+		nbCopy--;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 }

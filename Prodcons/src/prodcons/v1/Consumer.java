@@ -29,8 +29,6 @@ public class Consumer extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			System.out.println("Message Id "+ msg.getId() + " Produced by thred n: "+ msg.getContent()+ " Processed by "+ this.getId());
 		}
 	}
 }

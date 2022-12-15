@@ -25,21 +25,24 @@ public class ProdConsBuffer implements IProdConsBuffer {
 	@Override
 	public synchronized void put(Message m) throws InterruptedException {
 		// TODO Auto-generated method stub
-		while (nfull > buffSize)
+		while (nempty < 1)
 			wait();
 		messages[in] = m;
+		m.setId(totmsg);
+		System.out.println("Message " + m.getId() + " Produced by thred n: " + m.getContent());
 		in = (in + 1) % buffSize;
 		totmsg++;
 		nfull++;
 		nempty--;
 		Consumer.nbLectures++;
+
 		notifyAll();
 	}
 
 	@Override
 	public synchronized Message get() throws InterruptedException {
 		// TODO Auto-generated method stub
-		while (nempty == buffSize)
+		while (nfull < 1)
 			wait();
 		Message result = messages[out];
 
@@ -48,8 +51,17 @@ public class ProdConsBuffer implements IProdConsBuffer {
 		nfull--;
 
 		out = (out + 1) % buffSize;
-		if (Consumer.nbLectures == 0 && Producer.nbAlive() == 0)
+		System.out.println("Message Id " + result.getId() + " Produced by thread n: " + result.getContent()
+				+ " Consumed by " + Thread.currentThread().getName());
+		System.out.println("Messages read : " + Consumer.nbread);
+		System.out.println("Producers alive : " + Producer.nbAlive());
+		System.out.println("Nb lectures : " + Consumer.nbLectures);
+		if (Consumer.nbLectures == 0 && Producer.nbAlive() == 0) {
+			System.out.println("Program exiting...");
 			System.exit(0);
+		}
+
+		Consumer.nbread++;
 		notifyAll();
 		return result;
 	}
@@ -64,6 +76,18 @@ public class ProdConsBuffer implements IProdConsBuffer {
 	public int totmsg() {
 		// TODO Auto-generated method stub
 		return totmsg;
+	}
+
+	@Override
+	public void put(Message m, int nb) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Message[] get(int nb) throws InterruptedException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
